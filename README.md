@@ -10,4 +10,7 @@
 1)	分析不同时段IP的访问量
 2)	分析热门IP
 
+技术实现
+基于Storm和Spark Streaming
+
 
