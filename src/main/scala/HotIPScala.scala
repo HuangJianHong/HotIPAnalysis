@@ -2,9 +2,9 @@ import org.apache.log4j.{Level, Logger}
 import org.apache.spark.SparkConf
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.{DataFrame, SQLContext}
-import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.apache.spark.streaming.dstream.{DStream, ReceiverInputDStream}
 import org.apache.spark.streaming.kafka.KafkaUtils
+import org.apache.spark.streaming.{Seconds, StreamingContext}
 
 
 //使用Spark SQL分析流式数据
@@ -35,6 +35,9 @@ object HotIPScala {
     val kafkaStream: ReceiverInputDStream[(String, String)] = KafkaUtils
       .createStream(ssc, "192.168.18.21:2181", "mygroup", topic)
     //从kafka中，接收到的数据是<key value> key ---> null空值
+    /**
+      * DStream 实时流数据--> RDD流
+      */
     val logRDD: DStream[String] = kafkaStream.map(_._2)
 
     //日志：1,201.105.101.102,http://mystore.jsp/?productid=1,2017020029,2,1
